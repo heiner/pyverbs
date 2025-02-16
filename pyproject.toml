@@ -1,0 +1,37 @@
+[build-system]
+requires = [
+    "scikit-build-core>=0.10",
+    "cython>=3.0.12",
+]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "pyverbs"
+version = "56.0"
+requires-python = ">= 3.10"
+
+[tool.scikit-build]
+cmake.build-type = "Release"
+minimum-version = "build-system.requires"
+wheel.license-files = [
+    "rdma-core/COPYING.BSD_FB",
+    "rdma-core/COPYING.BSD_MIT",
+    "rdma-core/COPYING.GPL2",
+    "rdma-core/COPYING.md",
+]
+cmake.source-dir = "rdma-core"
+cmake.args = [
+    "-DNO_MAN_PAGES=1",
+    "-DNO_PYVERBS=0",
+    "-DCMAKE_INSTALL_PYTHON_ARCH_LIB=."
+]
+wheel.exclude = [
+    "bin/*",
+    "etc/*",
+    "include/*",
+    "lib/*",
+    "libexec/*",
+    "sbin/*",
+    "share/*",
+]
+wheel.packages = ["pyverbs"]
