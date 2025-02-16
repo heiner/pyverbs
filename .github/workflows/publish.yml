@@ -26,7 +26,7 @@ jobs:
           name: cibw-wheels-${{ matrix.os }}
           path: ./wheelhouse/*.whl
 
-  test-pypi-publish:
+  test_pypi_publish:
     name: Publish release to TestPyPI
     needs: build
     runs-on: ubuntu-latest
@@ -47,3 +47,25 @@ jobs:
           print-hash: true
           verbose: true
           repository-url: https://test.pypi.org/legacy/
+
+  pypi_publish:
+    if: "!github.event.release.prerelease"
+    name: Publish release to PyPI
+    needs: [build, test_pypi_publish]
+    runs-on: ubuntu-latest
+    environment:
+      name: release
+      url: https://pypi.org/p/pyverbs
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: cibw-wheels-ubuntu-latest
+          path: dist
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          print-hash: true
+          verbose: true

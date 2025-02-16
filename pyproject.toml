@@ -9,6 +9,8 @@ build-backend = "scikit_build_core.build"
 name = "pyverbs"
 version = "56.0"
 requires-python = ">= 3.10"
+description = "Python bindings for rdma-core"
+readme = "README.md"
 
 [tool.scikit-build]
 cmake.build-type = "Release"
