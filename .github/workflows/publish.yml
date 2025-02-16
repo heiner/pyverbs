@@ -1,4 +1,4 @@
-name: Upload Python Package to PyPI when a Release is Created
+name: deploy
 
 on:
   release:
@@ -6,44 +6,25 @@ on:
 
 jobs:
   build:
-    name: build
-    runs-on: ubuntu-latest
-    environment:
-      name: prerelease
-      url: https://test.pypi.org/p/pyverbs
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
     steps:
-      - run: |
-          sudo apt-get install -y \
-              build-essential \
-              cmake \
-              gcc \
-              libudev-dev \
-              libnl-3-dev \
-              libnl-route-3-dev \
-              ninja-build \
-              pkg-config \
-              valgrind
-
       - uses: actions/checkout@v4
         with:
           submodules: 'true'
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-
-      - name: "Set up Python"
-        uses: actions/setup-python@v5
-        with:
-          python-version-file: "pyproject.toml"
-
-      - name: Build package
-        run: |
-          uv build --wheel
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.22.0
+        env:
+          CIBW_BUILD_VERBOSITY: 3
 
       - uses: actions/upload-artifact@v4
         with:
-          name: python-wheels-ubuntu-latest
-          path: dist
+          name: cibw-wheels-${{ matrix.os }}
+          path: ./wheelhouse/*.whl
 
   test-pypi-publish:
     name: Publish release to TestPyPI
