@@ -12,6 +12,11 @@ requires-python = ">= 3.10"
 description = "Python bindings for rdma-core"
 readme = "README.md"
 
+[project.urls]
+Repository = "https://github.com/heiner/pyverbs"
+Documentation = "https://github.com/linux-rdma/rdma-core/blob/master/Documentation/pyverbs.md"
+Releases = "https://github.com/heiner/pyverbs/releases"
+
 [tool.scikit-build]
 cmake.build-type = "Release"
 minimum-version = "build-system.requires"
