@@ -50,7 +50,7 @@ build = "cp{38,39,310,311,312}-manylinux*"
 # We need to clean up the build directory, all .so files, and CMakeCache.txt
 # and install the dependencies using yum, as manylinux2014 image is CentOS 7-based
 # "rdma-core libibverbs librdmacm libibumad infiniband-diags" is here because the repair step loads the .so in the wheel.
-before-all = "rm -rf {project}/build {project}/*.so {project}/CMakeCache.txt && yum install -y cmake3 ninja-build gcc libnl3-devel libudev-devel pkgconfig valgrind-devel rdma-core libibverbs librdmacm libibumad infiniband-diags"
+before-all = "rm -rf {project}/build {project}/*.so {project}/CMakeCache.txt && yum install -y gcc libnl3-devel libudev-devel pkgconfig valgrind-devel rdma-core libibverbs librdmacm libibumad infiniband-diags"
 
 # Build for the architecure of the runner in the GitHub Actions workflow:
 # ubuntu-20.04 -> x86_64
