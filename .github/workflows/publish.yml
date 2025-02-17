@@ -20,6 +20,8 @@ jobs:
         uses: pypa/cibuildwheel@v2.22.0
         env:
           CIBW_BUILD_VERBOSITY: 3
+          CIBW_REPAIR_WHEEL_COMMAND_LINUX: >
+            unzip -l {wheel} && auditwheel show {wheel} && auditwheel repair -w {dest_dir} {wheel}
 
       - uses: actions/upload-artifact@v4
         with:
