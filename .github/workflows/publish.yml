@@ -85,7 +85,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: wheels-ubuntu-latest
+          name: sdist
           path: dist
 
       - name: Publish package distributions to PyPI
