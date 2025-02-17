@@ -50,7 +50,7 @@ jobs:
           name: sdist
           path: dist/*.tar.gz
 
-test_pypi_publish:
+  test_pypi_publish:
     name: Publish release to TestPyPI
     needs: [build]
     runs-on: ubuntu-latest
