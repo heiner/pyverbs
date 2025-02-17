@@ -50,6 +50,7 @@ build = "cp{38,39,310,311,312}-manylinux*"
 # We need to clean up the build directory, all .so files, and CMakeCache.txt
 # and install the dependencies using yum, as manylinux2014 image is CentOS 7-based
 # "rdma-core libibverbs librdmacm libibumad infiniband-diags" is here because the repair step loads the .so in the wheel.
+# https://docs.nvidia.com/networking/display/rhel810/important+packages+and+their+installation
 before-all = "rm -rf {project}/build {project}/*.so {project}/CMakeCache.txt && yum install -y gcc libnl3-devel libudev-devel pkgconfig valgrind-devel rdma-core libibverbs librdmacm libibumad infiniband-diags"
 
 # Build for the architecure of the runner in the GitHub Actions workflow:
@@ -58,5 +59,5 @@ before-all = "rm -rf {project}/build {project}/*.so {project}/CMakeCache.txt && 
 archs = "native"
 
 # Use manylinux2014 image for both x86_64 and aarch64
-manylinux-x86_64-image = "manylinux2014"
-manylinux-aarch64-image = "manylinux2014"
+manylinux-x86_64-image = "manylinux_2_28"
+manylinux-aarch64-image = "manylinux_2_28"
