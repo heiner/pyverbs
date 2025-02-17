@@ -32,6 +32,7 @@ wheel.exclude = [
     "etc/*",
     "include/*",
     "lib/*",
+    "lib64/*",
     "libexec/*",
     "sbin/*",
     "share/*",
