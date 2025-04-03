@@ -7,7 +7,7 @@ build-backend = "scikit_build_core.build"
 
 [project]
 name = "pyverbs"
-version = "56.0rc6"
+dynamic = ["version"]
 requires-python = ">= 3.10"
 description = "Python bindings for rdma-core"
 readme = "README.md"
@@ -20,6 +20,7 @@ Releases = "https://github.com/heiner/pyverbs/releases"
 [tool.scikit-build]
 cmake.build-type = "Release"
 minimum-version = "build-system.requires"
+metadata.version.provider = "scikit_build_core.metadata.setuptools_scm"
 wheel.license-files = [
     "rdma-core/COPYING.BSD_FB",
     "rdma-core/COPYING.BSD_MIT",
@@ -43,3 +44,5 @@ wheel.exclude = [
     "share/*",
 ]
 wheel.packages = ["pyverbs"]
+
+[tool.setuptools_scm]
